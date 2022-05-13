@@ -1,7 +1,7 @@
+import json
 from datetime import datetime
 
 import pytest
-import json
 
 from src.main import TimeEntry
 from tests.mock_data import entry_test, entry_test_json
@@ -48,9 +48,9 @@ def test_time_entry_in_json_format():
     )
     assert time_entry.__dict__ == entry_test_json
 
+
 def test_list_projects_in_clockfy():
     ...
-
 
 
 def test_time_start_in_api():
@@ -67,5 +67,3 @@ def test_time_stop_in_api():
 
 def test_time_stop_in_api_when_time_already_stoped():
     ...
-
-

@@ -2,34 +2,44 @@ import json
 from dataclasses import dataclass, field
 from datetime import datetime
 from typing import List, Optional
-from src.config import settings
-from loguru import logger
 
 import httpx
+from loguru import logger
 
-BASE_URL= 'https://api.clockify.me/api/v1'
+from src.config import settings
+
+BASE_URL = 'https://api.clockify.me/api/v1'
 HEADERS = {'content-type': 'application/json', 'X-Api-Key': settings.API_KEY}
+
+
 def time_now() -> datetime:
     return datetime.now()
 
+
 def list_clients():
     with httpx.Client() as client:
-        return client.get(f'{BASE_URL}/workspaces/settings.WORKSPACE_ID/clients', headers=HEADERS)
+        return client.get(
+            f'{BASE_URL}/workspaces/settings.WORKSPACE_ID/clients',
+            headers=HEADERS,
+        )
+
 
 def list_client(client_id=settings.CLIENT_ID):
     with httpx.Client() as client:
-        _URL =f'{BASE_URL}/workspaces/{settings.WORKSPACE_ID}/clients/{client_id}'
+        _URL = f'{BASE_URL}/workspaces/{settings.WORKSPACE_ID}/clients/{client_id}'
         logger.debug(_URL)
         return client.get(_URL, headers=HEADERS)
 
+
 def list_projects():
     with httpx.Client() as client:
-        _URL =f'{BASE_URL}/workspaces/{settings.WORKSPACE_ID}/projects'
+        _URL = f'{BASE_URL}/workspaces/{settings.WORKSPACE_ID}/projects'
         return client.get(_URL, headers=HEADERS)
+
 
 def list_tasks_by_project_id(project_id=settings.PROJECT_ID):
     with httpx.Client() as client:
-        _URL =f'{BASE_URL}/workspaces/{settings.WORKSPACE_ID}/projects/{project_id}/tasks'
+        _URL = f'{BASE_URL}/workspaces/{settings.WORKSPACE_ID}/projects/{project_id}/tasks'
         return client.get(_URL, headers=HEADERS)
 
 
@@ -59,5 +69,3 @@ class TimeEntry:
 
     def to_json(self):
         return json.dumps(self.__dict__)
-
-
