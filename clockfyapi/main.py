@@ -118,13 +118,7 @@ class TimeEntry:
         return json.dumps(self.__dict__)
 
 
-def main(f):
-    if f.__module__ == "__main__":
-        atexit.register(f)
-
-
-@main
-def get_data(*args):
+def main(*args):
     parser = argparse.ArgumentParser(description='Clockfy API CLI')
     parser.add_argument('method', choices=['start', 'stop', 'user'],
                         help='Start or Stop clockfy work time')
@@ -142,4 +136,5 @@ def get_data(*args):
             raise Exception('Not found')
 
 
-sys.modules['main'] = main  # noqa
+if __name__ == "__main__":
+    main()
