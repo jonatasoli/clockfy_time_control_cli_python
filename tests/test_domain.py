@@ -3,7 +3,7 @@ from datetime import datetime
 
 import pytest
 
-from src.main import TimeEntry
+from clockfyapi.main import TimeEntry
 from tests.mock_data import entry_test, entry_test_json
 
 

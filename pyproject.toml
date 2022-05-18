@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "clockify_api"
+name = "clockfyapi"
 version = "0.1.0"
 description = ""
 authors = ["Jonatas Luiz de Oliveira <contact@jonatasoliveira.dev>"]
@@ -23,6 +23,9 @@ pytest-watch = "^4.2.0"
 ipdb = "^0.13.9"
 ipython = "^8.3.0"
 pydocstyle = {version = "^6.1.1", extras = ["toml"]}
+
+[tool.poetry.scripts]
+clockcli = 'src.main'
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
